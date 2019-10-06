@@ -1,11 +1,58 @@
+<?php
+
+function sanitizeFormUsername($inputText)
+{
+    $inputText = strip_tags($inputText);
+    $inputText = str_replace(" ", "", $inputText);
+    return $inputText;
+}
+
+function sanitizeFormPassword($inputText)
+{
+    $inputText = strip_tags($inputText);
+    return $inputText;
+}
+
+function sanitizeFormString($inputText)
+{
+    $inputText = strip_tags($inputText);
+    $inputText = str_replace(" ", "", $inputText);
+    $inputText = ucfirst(strtolower($inputText));
+    return $inputText;
+}
+
+if (isset($_POST['loginButton'])) {
+    // login button was pressed
+}
+
+if (isset($_POST['registerButton'])) {
+    $username = sanitizeFormUsername($_POST['registerUsername']);
+
+    $firstName = sanitizeFormString($_POST['registerFirstName']);
+
+    $lastName = sanitizeFormString($_POST['registerLastName']);
+
+    $email = sanitizeFormString($_POST['registerEmail']);
+
+    $confirmEmail = sanitizeFormString($_POST['registerConfirmEmail']);
+
+    $password = sanitizeFormPassword($_POST['registerPassword']);
+    $confirmPassword = sanitizeFormPassword($_POST['registerConfirmPassword']);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible">
     <title>Welcome to Muzify</title>
 </head>
+
 <body>
 
     <div id="inputContainer">
@@ -50,10 +97,11 @@
             </p>
             <p>
                 <label for="registerConfirmPassword">Confirm Password</label>
-                <input id="registerConfirmPassword" name="registerConfirmPassword" type="password"  required>
+                <input id="registerConfirmPassword" name="registerConfirmPassword" type="password" required>
             </p>
             <button type="submit" name="registerButton">Sign up</button>
         </form>
     </div>
 </body>
+
 </html>
